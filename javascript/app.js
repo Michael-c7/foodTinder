@@ -74,6 +74,7 @@ let profilesEl = document.querySelector(".profile-section__profiles")
 let profileEl = document.querySelector(".profile__info")
 let likeBtnEl = document.querySelector(".button-choice-like")
 let dislikeBtnEl = document.querySelector(".button-choice-dislike")
+let likedFoodProfiles = []
 
 
 
@@ -215,6 +216,13 @@ let removeCurrentFoodProfile = _ => {
     nextFood.classList.add("profile--current");
 }
 
+let getlikedFoodProfile = _ => {
+    let currentFood = getCurrentFoodProfile();
+    let currentFoodTitle = currentFood.children[1].textContent.toLowerCase();
+    likedFoodProfiles.push(currentFoodTitle)
+}
+
+
 
 
 // like / dislike button
@@ -225,15 +233,12 @@ const dislikeButton = (event) => {
 }
 
 const likeButton = (event) => {
-    // removeCurrentFoodProfile()
-    /*add the title, eg: pizza, cake, sushi,eg to an array*/
-    // let x = getCurrentFoodProfile();
-    // console.log(x)
-
+    /*add the liked food to an array*/
+    getlikedFoodProfile()
+    // next food profile
+    removeCurrentFoodProfile()
 }
 
 
 dislikeBtnEl.addEventListener("click", dislikeButton);
 likeBtnEl.addEventListener("click", likeButton);
-
-
