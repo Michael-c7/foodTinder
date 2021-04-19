@@ -66,8 +66,7 @@ body {
     transform: translate(-50%, -50%);
     border-radius: 5px;
     box-shadow: 2px 2px 10px rgb(185, 185, 185);
-
-    height:55rem;
+    height:45rem;
 }
 
 
@@ -153,15 +152,15 @@ body {
     opacity:0;
 }
 
-.profile-section__profiles {
-    position: relative;
-    margin:1rem;
-}
-
 /*apply this class to the profile that currently being shown*/
 .profile--current {
     z-index:999;
     opacity:1;
+}
+
+.profile-section__profiles {
+    position: relative;
+    margin:1rem;
 }
 
 

@@ -89,23 +89,35 @@ function Food(type, image, nearestLocation, description) {
 
 const food1 = new Food("pizza","./images/food-images/pizza-0.jpg", 7, `Pizza is a savory dish of Italian origin consisting of a usually round, flattened base of leavened wheat-based dough topped with tomatoes, cheese, and often various other ingredients (such as anchovies, mushrooms, onions, olives, pineapple, meat, etc.), which is then baked at a high temperature, traditionally in a wood-fired oven. A small pizza is sometimes called a pizzetta. A person who makes pizza is known as a pizzaiolo.`)
 const food2 = new Food("cake", "./images/food-images/cake-0.jpg", 43, `Cake is a form of sweet food made from flour, sugar, and other ingredients, that is usually baked. In their oldest forms, cakes were modifications of bread, but cakes now cover a wide range of preparations that can be simple or elaborate, and that share features with other desserts such as pastries, meringues, custards, and pies.`)
-const food3 = new Food("Sushi", "./images/food-images/sushi-0.jpg", 163, `Sushi (すし, 寿司, 鮨, pronounced [sɯɕiꜜ] or [sɯꜜɕi]) is a traditional Japanese dish of prepared vinegared rice (鮨飯, sushi-meshi), usually with some sugar and salt, accompanying a variety of ingredients (ネタ, neta), such as seafood, often raw, and vegetables. Styles of sushi and its presentation vary widely, but the one key ingredient is "sushi rice", also referred to as shari (しゃり), or sumeshi (酢飯).`)
+const food3 = new Food("sushi", "./images/food-images/sushi-0.jpg", 163, `Sushi (すし, 寿司, 鮨, pronounced [sɯɕiꜜ] or [sɯꜜɕi]) is a traditional Japanese dish of prepared vinegared rice (鮨飯, sushi-meshi), usually with some sugar and salt, accompanying a variety of ingredients (ネタ, neta), such as seafood, often raw, and vegetables. Styles of sushi and its presentation vary widely, but the one key ingredient is "sushi rice", also referred to as shari (しゃり), or sumeshi (酢飯).`)
 
 let foodArr = [food1, food2, food3];
 // console.log(foodArr)
 
 
 
-const renderFood = _ => {
+
+
+const renderFoodProfile = _ => {
+    /*get the food data into the DOM*/
     foodArr.forEach(element => {
         let title = Object.values(element)[0];
         let image = Object.values(element)[1];
         let location = Object.values(element)[2];
         let description = Object.values(element)[3];
 
+        /*makes the description max of 182 character
+        (182 characters because this look best w/ the current UI)*/
+        let descriptionTrimmedArr = [];
+        let descriptionCharCounter = 0;
+        for(let i = 0; i < description.length; i++) {
+            if(descriptionCharCounter !== 182) {
+                descriptionTrimmedArr.push(description[i])
+                descriptionCharCounter++;
+            }
+        }
 
-
-        // ul --> profilesEl
+        // ul === profilesEl
         /*document fragment*/
             let fragment = document.createDocumentFragment();
             // items
@@ -134,13 +146,11 @@ const renderFood = _ => {
             imgIcon.alt = "location icon"
             a.target = "_blank"
             a.href = `https://en.wikipedia.org/wiki/${title}`
-
             //  text / inner values
             h2.textContent = title;
             span.textContent = `nearest location ${location} miles away`
-            p.textContent = description;
+            p.textContent = descriptionTrimmedArr.join("") + "...";
             a.textContent = "Read more"
-
             // appending everything
             fragment.appendChild(li)
             li.appendChild(img)
@@ -151,34 +161,79 @@ const renderFood = _ => {
             li.appendChild(p)
             li.appendChild(button)
             button.appendChild(a)
-
-
+            // append the fragment to the DOM
             profilesEl.appendChild(fragment);
-        /*
-        <li class="profile-section__profile">
-            <img class="image-container__img" src="./images/food-images/pizza-0.jpg" alt="food image">
-
-            <h2 class="profile__info__title">Pizza</h2>
-
-            <h3 class="profile__info__location">
-                <img class="icon icon-location" src="./images/icons/map-marker-alt-solid.svg" alt="location icon">
-                <span>nearest location 24 miles away</span>
-            </h3>
-
-            <p class="profile__info__description">
-            Pizza is a savory dish of Italian origin
-            consisting of a usually round,
-            flattened base of leavened wheat-based
-            dough topped with tomatoes,
-            cheese, and often various other ingredients...
-            <button class="read-more-btn"><a class="read-more-btn__link" target="_blank" href="https://en.wikipedia.org/wiki/Pizza">Read more</a></button>
-            </p>
-        </li>
-        */
     });
 
+    let ProfilesFirstChild = profilesEl.children[0];
+    ProfilesFirstChild.classList.add("profile--current");
+    /*when you click the heart or like button
+    need to remove the profile--current class(from every element)
+    then apply it to the next element*/
+}
 
+renderFoodProfile();
+
+
+
+
+
+
+
+
+
+
+
+
+let getCurrentFoodProfile = _ => {
+    let currentProfileSection = Array.from(event.target.parentElement.parentElement.previousElementSibling.children[0].children);
+    let currentFood = "";
+
+    currentProfileSection.forEach(element => {
+        if(element.classList.contains("profile--current")) {
+         currentFood = element;
+        }
+    });
+
+    return currentFood;
+}
+
+
+
+let removeCurrentFoodProfile = _ => {
+    let currentProfileSection = Array.from(event.target.parentElement.parentElement.previousElementSibling.children[0].children);
+    let currentFood = getCurrentFoodProfile();
+    /*if nothing next will return null*/
+    let nextFood = currentFood.nextElementSibling;
+
+    currentFood.remove();
+    /* remove the profile--current class
+    from every food profile*/
+    currentProfileSection.forEach(element =>
+     element.classList.remove("profile--current"));
+
+    nextFood.classList.add("profile--current");
+}
+
+
+
+// like / dislike button
+const dislikeButton = (event) => {
+    // next food profile
+    removeCurrentFoodProfile()
+    // do nothing
+}
+
+const likeButton = (event) => {
+    // removeCurrentFoodProfile()
+    /*add the title, eg: pizza, cake, sushi,eg to an array*/
+    // let x = getCurrentFoodProfile();
+    // console.log(x)
 
 }
 
-renderFood()
+
+dislikeBtnEl.addEventListener("click", dislikeButton);
+likeBtnEl.addEventListener("click", likeButton);
+
+
