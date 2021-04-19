@@ -21,26 +21,21 @@ wikipedia article of the given food.
 
 
 /*TODO
-1. create the food data(that your going to swipe on)
-- set up the food constructor
-- create instances of that constructor(eg: pizza, sushi, ect...)
-- put it into the DOM
-
-2. create a working dislike button
-- just move to the next food / slide
-- remove it from the list of food your being shown
-
-3. create a working like button
-- store the food in a data structure,
-  so you can use that food data later
-  (to find location to eat that food at)
-
 4. create the results tab / get it working
-- create the HTML / CSS
+- create the HTML / CSS [X]
+
+- Click on the recipe btn(book icon) & get linked to
+https://www.allrecipes.com/search/results/?search=food
+(of the current food)
+
+- Click on the direction btn(book icon) & get linked to
+https://www.google.com/maps/search/food/@Xlocation,yLocation
+(of the current food)
+
 - show the all the(saved) food that they liked,
 and location where they can order that food at
 AND a recipe(s) that they can use to make that food themselves.
-    - recipe can either be from youtube or a recipe api
+    - recipe can either be from a recipe api
 
 Additional notes / features
     - when you have swiped through all the food,
@@ -53,8 +48,19 @@ Additional notes / features
 Do all the oop stuff then stop. when we get to the ajax / api section
 then finish that section
 
+// directions
+
 // https://www.google.com/maps/search/food/@Xlocation,yLocation
+// EG:
 https://www.google.com/maps/search/cake/@45.0910692,-93.3317112
+
+
+
+// recipes
+
+// https://www.allrecipes.com/search/results/?search=food
+// EG:
+// // https://www.allrecipes.com/search/results/?search=cake
 */
 
 
@@ -98,7 +104,7 @@ let foodArr = [food1, food2, food3];
 
 
 
-
+/*swipe tab*/
 const renderFoodProfile = _ => {
     /*get the food data into the DOM*/
     foodArr.forEach(element => {
@@ -242,3 +248,19 @@ const likeButton = (event) => {
 
 dislikeBtnEl.addEventListener("click", dislikeButton);
 likeBtnEl.addEventListener("click", likeButton);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*results tab*/

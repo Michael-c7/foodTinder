@@ -164,6 +164,8 @@ body {
 }
 
 
+
+
 .image-container__img {
     width:100%;
     height:250px;
@@ -269,4 +271,91 @@ body {
 .icon-heart {
     position: relative;
     top:2px;
+}
+
+
+/*apply this class to parts
+ of the app the are not active*/
+ .deactive {
+     display: none;
+     z-index:-999;
+     opacity: 0;
+ }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ /*results tab*/
+.profile-section__saved-food {
+    display: flex;
+    flex-direction: column;
+}
+
+ .saved-food__item {
+    background:#e2e1e1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding:0.5rem;
+    margin:0.5rem 0;
+    border-radius: 2px;
+}
+
+.saved-food__item__food {
+    font-size:1.25rem;
+    margin-left:0.5rem;
+}
+
+.save-food-item-btn {
+    position: relative;
+    margin:0 0.5rem;
+    padding:1rem;
+    border-radius: 50%;
+    border:2px solid #fff;
+    width:3.5rem;
+    height:3.5rem;
+}
+
+.icon--save-food {
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+}
+
+.save-food-item-btn:focus {
+    outline: none;
+}
+
+.save-food-item-btn:hover {
+    cursor: pointer;
+    transform: scale(0.9);
+    transition: transform filter 150ms ease;
+}
+
+.save-food-item-btn:active {
+    cursor: pointer;
+    transform: scale(1);
+    transition: transform filter 50ms ease;
+}
+
+
+
+
+.save-food__item__btns > *:nth-child(1) {
+    background:#82b0ce;
+}
+
+.save-food__item__btns > *:nth-child(2) {
+    background:#83cfa3;
 }
