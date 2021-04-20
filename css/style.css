@@ -250,7 +250,6 @@ body {
     outline: none;
     box-shadow: inset 0px 0px 5px #dddcdc;
     transition: all 0.3s ease;
-    
 }
 
 .button-choice:hover {
@@ -313,17 +312,16 @@ body {
 
 .saved-food__item__food {
     font-size:1.25rem;
-    margin-left:0.5rem;
+    margin-left:0.25rem;
 }
 
 .save-food-item-btn {
     position: relative;
-    margin:0 0.5rem;
-    padding:1rem;
-    border-radius: 50%;
+    margin:0 0.25rem;
+    border-radius: 5px;
     border:2px solid #fff;
-    width:3.5rem;
-    height:3.5rem;
+    width:3rem;
+    height:3rem;
 }
 
 .icon--save-food {
@@ -358,4 +356,8 @@ body {
 
 .save-food__item__btns > *:nth-child(2) {
     background:#83cfa3;
+}
+
+.save-food__item__btns > *:nth-child(3) {
+    background:#eb5f5f;
 }
