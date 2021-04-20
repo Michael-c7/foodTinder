@@ -85,7 +85,7 @@ let profileChoiceBtnContainer = document.querySelector(".button-choice-section")
 let appMenuSwipeBtnEl = document.querySelector(".app__menu__swipe")
 let appMenuResultEl = document.querySelector(".app__menu__result")
 let savedFoodEl = document.querySelector(".profile-section__saved-food")
-let likedFoodProfiles = ["chicken", "noodles"]
+let likedFoodProfiles = []
 
 
 
@@ -230,6 +230,7 @@ let getlikedFoodProfile = _ => {
     let currentFood = getCurrentFoodProfile();
     let currentFoodTitle = currentFood.children[1].textContent.toLowerCase();
     likedFoodProfiles.push(currentFoodTitle)
+    console.log(likedFoodProfiles)
 }
 
 
@@ -247,6 +248,8 @@ const likeButton = (event) => {
     getlikedFoodProfile()
     // next food profile
     removeCurrentFoodProfile()
+
+    renderResults()
 }
 
 
@@ -268,42 +271,32 @@ likeBtnEl.addEventListener("click", likeButton);
 
 
 /*results tab*/
-// SWIPE
-//appMenuSwipeBtnEl
-
-    // profilesEl
-    // profileChoiceBtnContainer
-// RESULT
-// appMenuResultEl
-    // savedFoodEl
-
-
-
 appMenuSwipeBtnEl.addEventListener("click", function() {
-    //
+    // the tabs background color
     appMenuResultEl.classList.remove("app__menu__choice--active")
     appMenuSwipeBtnEl.classList.add("app__menu__choice--active")
-    //
+    // the actual menu
     profilesEl.classList.remove("deactive")
     profileChoiceBtnContainer.classList.remove("deactive")
     savedFoodEl.classList.add("deactive")
 });
 
 appMenuResultEl.addEventListener("click", function() {
-    //
+    // the tabs background color
     appMenuSwipeBtnEl.classList.remove("app__menu__choice--active")
     appMenuResultEl.classList.add("app__menu__choice--active")
-    //
+    // the actual menu
     savedFoodEl.classList.remove("deactive")
     profilesEl.classList.add("deactive")
     profileChoiceBtnContainer.classList.add("deactive")
-})
+});
 
 
 
 
 const renderResults = _ => {
     /*get the food data into the DOM*/
+    console.log(likedFoodProfiles)
     likedFoodProfiles.forEach(likedFood => {
 
         // ul === profilesEl
@@ -361,6 +354,3 @@ const renderResults = _ => {
             savedFoodEl.appendChild(fragment);
     });
 }
-
-
-renderResults()
